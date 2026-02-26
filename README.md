@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MD Annotator
+
+A web app for annotating Markdown documents. Select text ranges, tag them with annotation types, add instructions, and export a structured payload — designed for Claude Code handoffs.
+
+![MD Annotator demo — editor, annotations list, and export](public/screenshots/md-annotator-demo.gif)
+
+## What It Does
+
+MD Annotator lets you mark up a Markdown document with semantic annotations before handing it off to an AI assistant. Instead of writing long instructions, you highlight the exact text you want changed and label it.
+
+**Five annotation types:**
+
+| Type | Purpose | Visual Style |
+|------|---------|--------------|
+| **Edit** | Request a change to specific text | Dashed underline |
+| **Ask** | Ask a question about specific text | Solid underline |
+| **Keep** | Mark text that must not change | Outline box |
+| **Delete** | Request removal of specific text | Strikethrough |
+| **Note** | Attach a comment (no change needed) | Left border |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
 
 ```bash
+git clone https://github.com/lukaspitter-x/md-annotator.git
+cd md-annotator
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Step 1 — Write or paste your Markdown
 
-## Learn More
+Type or paste Markdown content into the editor. The editor provides syntax highlighting for headings, bold, italic, code, links, lists, and blockquotes.
 
-To learn more about Next.js, take a look at the following resources:
+Your work is automatically saved to localStorage, so you can close the tab and come back later.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Step 2 — Select text to annotate
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Highlight any text range in the editor. A floating toolbar appears at the bottom of the screen showing your selection with an **Annotate** button.
 
-## Deploy on Vercel
+### Step 3 — Choose an annotation type
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Tap **Annotate** to open the annotation sheet. Pick one of the five types (edit, ask, keep, del, note) and optionally write an instruction or comment explaining what you want done.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hit **Save** to create the annotation. The annotated text is now visually highlighted in the editor with a style matching its type.
+
+### Step 4 — Review and manage annotations
+
+- Click any highlighted text in the editor to jump to its annotation for editing
+- Open the **Annotations** drawer (button in the header with count badge) to see all annotations listed by position
+- Navigate between annotations with the **Prev/Next** buttons
+- Edit the type, comment, or delete any annotation
+
+### Step 5 — Export the payload
+
+Click **Export** in the header to open the export drawer. The payload includes:
+
+1. **Processing instructions** — A guide for Claude on how to interpret the annotations
+2. **Annotated Markdown** — Your document with inline markers wrapping each annotated range:
+   ```
+   <<ANN:id=abc123 type=edit>>text to change<</ANN>>
+   ```
+3. **Annotation index** — A JSON block listing every annotation with its type, selected text, and comment
+
+Use the copy buttons to grab the full payload, just the annotated markdown, or just the instructions.
+
+### Step 6 — Hand off to Claude Code
+
+Paste the exported payload into Claude Code. The inline markers and annotation index give Claude exact context about what you want changed, kept, questioned, or removed.
+
+## Features
+
+- **Autosave** — Debounced save to localStorage (1 second delay)
+- **Dark mode** — Toggle via system preference, powered by next-themes
+- **Mobile optimized** — Fixed viewport, safe area insets, touch-friendly targets, iOS clipboard fallback
+- **No overlap** — Annotations cannot overlap; the app enforces this on creation
+- **Mismatch detection** — Warns you if document edits invalidate existing annotation positions
+- **Markdown syntax highlighting** — Headings, bold, italic, code blocks, links, lists, and blockquotes
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) with App Router
+- [React 19](https://react.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/) (New York style) on Radix UI
+- [Vaul](https://vaul.emilkowal.ski/) for drawer modals
+- [nanoid](https://github.com/ai/nanoid) for annotation IDs
+- [Sonner](https://sonner.emilkowal.ski/) for toast notifications
+
+## Scripts
+
+```bash
+npm run dev      # Start dev server on port 3000
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
+
+## License
+
+MIT
