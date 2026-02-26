@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MD Annotator",
+  title: "MDMA",
   description: "Annotate Markdown and export Claude Code handoff payloads",
 };
 

@@ -1,12 +1,12 @@
-# MD Annotator
+# MDMA — Mark Down My Annotator
 
 A web app for annotating Markdown documents. Select text ranges, tag them with annotation types, add instructions, and export a structured payload — designed for Claude Code handoffs.
 
-![MD Annotator demo — editor, annotations list, and export](public/screenshots/md-annotator-demo.gif)
+![MDMA demo — editor, annotations list, and export](public/screenshots/md-annotator-demo.gif)
 
 ## What It Does
 
-MD Annotator lets you mark up a Markdown document with semantic annotations before handing it off to an AI assistant. Instead of writing long instructions, you highlight the exact text you want changed and label it.
+MDMA lets you mark up a Markdown document with semantic annotations before handing it off to an AI assistant. Instead of writing long instructions, you highlight the exact text you want changed and label it.
 
 **Five annotation types:**
 
