@@ -1,26 +1,334 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
+/* Mobile-safe styles */
+html,
 body {
-  background: var(--background);
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Prevent iOS zoom on input focus */
+textarea,
+input,
+select {
+  font-size: 16px !important;
+}
+
+/* Annotation highlight styles — Figma-style blue emphasis */
+.ann-edit,
+.ann-ask,
+.ann-keep,
+.ann-del,
+.ann-note {
+  color: oklch(0.5 0.2 260);
+  background: oklch(0.95 0.04 260);
+}
+
+.ann-edit {
+  border-bottom: 2px dashed oklch(0.5 0.2 260);
+}
+.ann-ask {
+  border-bottom: 2px solid oklch(0.5 0.2 260);
+}
+.ann-keep {
+  outline: 1px solid oklch(0.7 0.14 260);
+  border-radius: 2px;
+}
+.ann-del {
+  text-decoration: line-through;
+  text-decoration-color: oklch(0.5 0.2 260);
+}
+.ann-note {
+  border-left: 3px solid oklch(0.5 0.2 260);
+  padding-left: 2px;
+}
+
+/* Ensure blue overrides markdown syntax coloring inside annotations */
+.ann-edit span,
+.ann-ask span,
+.ann-keep span,
+.ann-del span,
+.ann-note span {
+  color: inherit;
+}
+
+.dark .ann-edit,
+.dark .ann-ask,
+.dark .ann-keep,
+.dark .ann-del,
+.dark .ann-note {
+  color: oklch(0.72 0.18 260);
+  background: oklch(0.25 0.06 260);
+}
+
+.dark .ann-edit {
+  border-bottom-color: oklch(0.65 0.2 260);
+}
+.dark .ann-ask {
+  border-bottom-color: oklch(0.65 0.2 260);
+}
+.dark .ann-keep {
+  outline-color: oklch(0.5 0.14 260);
+}
+.dark .ann-del {
+  text-decoration-color: oklch(0.65 0.2 260);
+}
+.dark .ann-note {
+  border-left-color: oklch(0.65 0.2 260);
+}
+
+/* Unified editor overlay styles */
+.unified-editor-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.unified-editor-backdrop {
+  position: absolute;
+  inset: 0;
+  padding: 1rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 16px !important;
+  line-height: 1.625;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  pointer-events: none;
+}
+
+.unified-editor-textarea {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 1rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 16px !important;
+  line-height: 1.625;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--foreground);
+  -webkit-text-fill-color: transparent;
+  outline: none;
+  overflow: auto;
+  border: none;
+}
+
+/* Markdown syntax highlighting classes */
+.md-dim {
+  opacity: 0.35;
+}
+
+.md-heading {
+  font-weight: 700;
+  color: oklch(0.45 0.15 260);
+}
+.md-heading-1 { font-weight: 800; }
+
+.md-bold {
+  font-weight: 700;
+}
+
+.md-italic {
+  font-style: italic;
+}
+
+.md-code {
+  background: oklch(0.95 0 0);
+  border-radius: 3px;
+  padding-inline: 1px;
+}
+
+.md-codeblock-content {
+  background: oklch(0.96 0 0);
+}
+
+.md-link-text {
+  color: oklch(0.5 0.15 250);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.md-list-marker {
+  color: oklch(0.5 0.15 260);
+  font-weight: 600;
+}
+
+.md-blockquote-content {
+  color: oklch(0.5 0 0);
+  font-style: italic;
+}
+
+.md-hr {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+.md-strikethrough {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Dark mode overrides for markdown highlighting */
+.dark .md-dim {
+  opacity: 0.3;
+}
+
+.dark .md-heading {
+  color: oklch(0.75 0.15 250);
+}
+
+.dark .md-code {
+  background: oklch(0.25 0 0);
+}
+
+.dark .md-codeblock-content {
+  background: oklch(0.22 0 0);
+}
+
+.dark .md-link-text {
+  color: oklch(0.7 0.15 250);
+}
+
+.dark .md-list-marker {
+  color: oklch(0.7 0.15 260);
+}
+
+.dark .md-blockquote-content {
+  color: oklch(0.65 0 0);
+}
+
+.dark .md-strikethrough {
+  opacity: 0.5;
 }
